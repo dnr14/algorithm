@@ -1,4 +1,3 @@
-
 class Tree {
   constructor(size) {
     this.nodes = [];
@@ -83,37 +82,27 @@ inorder(root);
 // postorder(root);
 
 function inorder(node) {
-
-  if (node.left !== undefined) {
+  if (node != null) {
     inorder(node.left);
-  }
-  console.log(node.data);
-  if (node.right !== undefined) {
+    console.log(node.data);
     inorder(node.right);
   }
-
 }
 
 function preorder(node) {
-
-  console.log(node.data);
-  if (node.left !== undefined) {
+  if (node != null) {
+    console.log(node.data);
     preorder(node.left);
-  }
-  if (node.right !== undefined) {
     preorder(node.right);
   }
+
 
 }
 
 function postorder(node) {
-
-  if (node.left !== undefined) {
+  if (node != null) {
     postorder(node.left);
-  }
-  if (node.right !== undefined) {
     postorder(node.right);
+    console.log(node.data);
   }
-  console.log(node.data);
 }
-
