@@ -1,10 +1,17 @@
-solution("xababcdcdababcdcd");
+solution("aabbaccc");
+// solution("ababcdcdababcdcd");
+// solution("abcabcdede");
+// solution("abcabcabcabcdededededede");
+// solution("xababcdcdababcdcd");
+// solution("a");
+// solution("aaaaa");
+// solution("aaaaaaaaaa");
 function solution(s) {
   let min = "";
   //문자열을 자르는 기준
   let i = 1;
   while (1) {
-    if (i++ === s.length) break;
+
     let str = "";
     let count = 1;
     for (let j = 0; j < s.length; j += i) {
@@ -19,8 +26,11 @@ function solution(s) {
       }
     }
 
+    console.log(i, str);
+    // 짜른 문자열 결과를 보고 싶으면 주식 해제
     if (min.length === 0 || min.length > str.length)
       min = str;
+    if (i++ === s.length) break;
   }
 
   console.log(`str : ${min}  result : ${min.length}`);
