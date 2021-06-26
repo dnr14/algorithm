@@ -1,4 +1,3 @@
-
 class Tree {
   constructor(size) {
     this.nodes = [];
