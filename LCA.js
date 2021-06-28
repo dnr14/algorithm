@@ -1,5 +1,7 @@
+// 최소 공통 조상
 // 찾고자 하는 노드1,노드2의 최소 공통 부모를 계산하시오.
-// 최소의 의미는 제일 낮은 깊이를 의미한다.
+// 최소의 의미는 자식정점에서 가장 깊은 깊이를 가진 부모를 의미한다.
+// v가 w의 자식이라면 v는 w의 lca가 될 수 있다.
 class Node {
   constructor(data) {
     this.data = data;
@@ -27,7 +29,8 @@ class Tree {
   }
 
   // 노드의 깊이 파악
-  dfs(startNode, depth = 1) {
+  // 재귀적으로 호출한다.
+  dfs(startNode, depth = 0) {
     let node = startNode;
 
     node.depth = depth;
@@ -50,6 +53,7 @@ class Tree {
     }
   }
 
+  // 정수로만 이루어지고 정렬된 배열을 가지고 트리를 만드는 함수
   make() {
     this.root = this.makeBinaryTree(this.array, 0, this.array.length - 1);
   }
@@ -62,6 +66,7 @@ class Tree {
     return node;
   }
 
+  // 만들어진 트리에서 찾고자하는 Node(vertex) 찾아주는 함수 
   searchBtree(node, findNum) {
     if (node === null) return;
     if (node.data === findNum) return node;
@@ -71,8 +76,9 @@ class Tree {
       return this.searchBtree(node.right, findNum);
     }
   }
-
 }
+
+
 //                        7
 //      3                                 11
 //   1       5                          9     13 
@@ -80,50 +86,25 @@ class Tree {
 const tree = new Tree(15);
 tree.make();
 tree.dfs(tree.root);
-let u = tree.searchBtree(tree.root, 3);
-let v = tree.searchBtree(tree.root, 5);
-LCA(u, v);
+let w = tree.searchBtree(tree.root, 3);
+let v = tree.searchBtree(tree.root, 14);
+// LCA(w, v);
 
 // 일반적인 LCA 깊이와 부모가 같은지 노드 한칸씩비교
-function LCA(u, v) {
-  let depth1 = u.depth;
+// O(n)이 걸린다.
+function LCA(w, v) {
+  let depth1 = w.depth;
   let depth2 = v.depth;
 
   //서로 같은 노드에 있다면 해당노드가 공통부모
   //자기자신도 부모에 포함
   if (depth1 > depth2) {
-    LCA(u.parent, v);
+    LCA(w.parent, v);
   } else if (depth1 < depth2) {
-    LCA(u, v.parent);
+    LCA(w, v.parent);
   } else if (depth1 === depth2) {
-    u.data === v.data
-      ? console.log(u.data)
-      : LCA(u.parent, v.parent);
+    w.data === v.data
+      ? console.log(w.data)
+      : LCA(w.parent, v.parent);
   }
 }
-
-function BFS(node) {
-  const queue = [];
-  queue.push(node);
-
-  while (1) {
-    let node = queue.shift();
-    console.log(node.data);
-    if (node.visit === false) {
-      node.visit = true;
-      if (node.left !== undefined) {
-        if (node.left.visit === false) {
-          queue.push(node.left);
-        }
-      }
-
-      if (node.right !== undefined) {
-        if (node.right.visit === false) {
-          queue.push(node.right);
-        }
-      }
-    }
-    if (queue.length === 0) return;
-  }
-}
-
