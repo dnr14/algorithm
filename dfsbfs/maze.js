@@ -22,14 +22,14 @@ class Maze {
         if (value !== 0) return;
         this.array[x][y] = new Node(x, y);
       });
-    })
+    });
     return this;
   }
 
   // 자기 자신 기준으로 인접 노드가 있는지 확인
   addEdge() {
-    this.array.forEach(rows => {
-      rows.forEach(value => {
+    this.array.forEach((rows) => {
+      rows.forEach((value) => {
         if (value === 1) return;
 
         let node = value;
@@ -41,8 +41,7 @@ class Maze {
         let yup = y + 1; // 동
         let ydown = y - 1; //서
 
-
-        let INF = 9999;
+        let INF = Number.MAX_SAFE_INTEGER;
         let 북 = INF;
         let 동 = INF;
         let 서 = INF;
@@ -79,15 +78,11 @@ class Maze {
             node.add(서);
           }
         }
-
       });
     });
     return this;
   }
-
-
 }
-
 
 class Node {
   constructor(x, y) {
@@ -126,9 +121,9 @@ function bfs(start) {
 
     if (node.visit === false) {
       node.visit = true;
-      node.children.forEach(child => {
+      node.children.forEach((child) => {
         if (child.visit === false) {
-          child.data = (data + -1);
+          child.data = data + -1;
           queue.push(child);
         }
       });
@@ -154,9 +149,9 @@ function dfs(start) {
 
     if (node.visit === false) {
       node.visit = true;
-      node.children.forEach(child => {
+      node.children.forEach((child) => {
         if (child.visit === false) {
-          child.data = (data + -1);
+          child.data = data + -1;
           stack.push(child);
         }
       });
@@ -167,7 +162,6 @@ function dfs(start) {
       console.log(`dfs 출구 count : ${count}`);
       break;
     }
-
   }
 }
 
