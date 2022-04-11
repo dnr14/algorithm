@@ -1,10 +1,10 @@
 class Node {
   constructor(data) {
     this.data = data;
-    this.left = undefined;
-    this.right = undefined;
-    this.depth = undefined;
-    this.parent = undefined;
+    this.left = null;
+    this.right = null;
+    this.depth = null;
+    this.parent = null;
     this.visit = false;
   }
   addRight(node) {
@@ -34,13 +34,12 @@ class Tree {
     node.right = this.makeBinaryTree(array, mid + 1, end);
     return node;
   }
-
 }
 
 //                        7
 //      3                                 11
-//   1       5                          9     13 
-//  0  2   4   6                      8  10  12  14 
+//   1       5                          9     13
+//  0  2   4   6                      8  10  12  14
 const tree = new Tree(15);
 tree.make();
 BFS(tree.root);
@@ -55,13 +54,13 @@ function BFS(node) {
     console.log(node.data);
     if (node.visit === false) {
       node.visit = true;
-      if (node.left !== undefined) {
+      if (node.left !== null) {
         if (node.left.visit === false) {
           queue.push(node.left);
         }
       }
 
-      if (node.right !== undefined) {
+      if (node.right !== null) {
         if (node.right.visit === false) {
           queue.push(node.right);
         }
@@ -70,4 +69,3 @@ function BFS(node) {
     if (queue.length === 0) return;
   }
 }
-
