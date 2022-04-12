@@ -1,3 +1,4 @@
+//level 2
 function solution(array, loc) {
   let answer = [];
 
