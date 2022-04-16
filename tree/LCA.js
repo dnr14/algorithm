@@ -66,7 +66,7 @@ class Tree {
     return node;
   }
 
-  // 만들어진 트리에서 찾고자하는 Node(vertex) 찾아주는 함수 
+  // 만들어진 트리에서 찾고자하는 Node(vertex) 찾아주는 함수
   searchBtree(node, findNum) {
     if (node === null) return;
     if (node.data === findNum) return node;
@@ -78,17 +78,16 @@ class Tree {
   }
 }
 
-
 //                        7
 //      3                                 11
-//   1       5                          9     13 
-//  0  2   4   6                      8  10  12  14 
+//   1       5                          9     13
+//  0  2   4   6                      8  10  12  14
 const tree = new Tree(15);
 tree.make();
 tree.dfs(tree.root);
-let w = tree.searchBtree(tree.root, 3);
-let v = tree.searchBtree(tree.root, 14);
-// LCA(w, v);
+let w = tree.searchBtree(tree.root, 14);
+let v = tree.searchBtree(tree.root, 8);
+LCA(w, v);
 
 // 일반적인 LCA 깊이와 부모가 같은지 노드 한칸씩비교
 // O(n)이 걸린다.
@@ -103,8 +102,6 @@ function LCA(w, v) {
   } else if (depth1 < depth2) {
     LCA(w, v.parent);
   } else if (depth1 === depth2) {
-    w.data === v.data
-      ? console.log(w.data)
-      : LCA(w.parent, v.parent);
+    w.data === v.data ? console.log(w.data) : LCA(w.parent, v.parent);
   }
 }
