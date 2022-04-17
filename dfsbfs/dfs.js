@@ -43,3 +43,22 @@ function dfs(index) {
 }
 
 dfs(0);
+
+function dfs2(nodes, idx) {
+  const children = nodes[idx];
+  if (children === null) return;
+
+  for (const node of children) {
+    console.log("노드==>", node);
+    dfs(nodes, node - 1);
+  }
+}
+
+//          1
+//    2          3
+// 4  5  6          7
+//       8
+
+const nodes2 = [[2, 3], [4, 5, 6], [7], null, null, [8], null, null];
+
+dfs(nodes2, 0);
